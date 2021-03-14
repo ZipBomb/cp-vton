@@ -121,7 +121,8 @@ class FeatureRegression(nn.Module):
 
     def forward(self, x):
         x = self.conv(x)
-        x = x.view(x.size(0), -1)
+        # Seen in https://github.com/cezannec/capsule_net_pytorch/issues/4#issuecomment-629573681
+        x = x.reshape(x.size(0), -1)
         x = self.linear(x)
         x = self.tanh(x)
         return x
